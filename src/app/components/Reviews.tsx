@@ -19,7 +19,7 @@ const reviews = [
     name: "Nuwan & Madhushani",
     location: "Galle",
     date: "February 2026",
-    comment: "Service එක ගොඩක් fast සහ friendly. අපිට අවශ්‍ය විදිහට edits ටික ඉක්මනටම කරලා দিলා live කළා. Price එකත් ගොඩක් reasonable. Good luck Knot.lk team!",
+    comment: "Service එක ගොඩක් fast සහ friendly. අපිට අවශ්‍ය විදිහට edits ටික ඉක්මනටම කරලා කළා. Price එකත් ගොඩක් reasonable. Good luck Knot.lk team!",
     package: "Basic Package",
   },
 ];
