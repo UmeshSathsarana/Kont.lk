@@ -1,26 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-dark: #050507;
+  --bg-card: rgba(24, 24, 27, .78);
+  --gold: #d4af37;
+  --gold-light: #f3e5ab;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+}
+* { box-sizing: border-box; scroll-behavior: smooth; }
+html { scroll-padding-top: 90px; }
+body { margin: 0; background: var(--bg-dark); color: var(--text-main); font-family: 'Poppins', sans-serif; line-height: 1.7; overflow-x: hidden; }
+h1,h2,h3,.logo { font-family: 'Playfair Display', serif; }
+a { color: inherit; text-decoration: none; }
+button,input,textarea { font: inherit; }
+::selection { background: rgba(212,175,55,.35); }
+.luxury-btn { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; background:linear-gradient(135deg,#d4af37 0%,#aa771c 100%); color:#050507; padding:11px 24px; border-radius:999px; font-size:14px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:all .35s ease; box-shadow:0 4px 20px rgba(212,175,55,.22); }
+.luxury-btn:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(212,175,55,.42); }
+.outline-btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 24px; border:1px solid rgba(212,175,55,.4); border-radius:999px; color:#fff; font-size:14px; transition:all .3s ease; }
+.outline-btn:hover { border-color:var(--gold); color:var(--gold); background:rgba(212,175,55,.08); transform:translateY(-3px); }
+.section-title { text-align:center; margin:0 auto 58px; max-width:760px; }
+.section-title h2 { margin:0 0 12px; color:#fff; font-size:clamp(2rem,4vw,2.6rem); line-height:1.2; }
+.section-title p { margin:0; color:var(--text-muted); font-size:14px; }
+.glass-card { background:var(--bg-card); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.07); border-radius:22px; transition:all .35s ease; }
+.glass-card:hover { transform:translateY(-7px); border-color:rgba(212,175,55,.45); box-shadow:0 25px 50px rgba(0,0,0,.45); }
+.gold-icon { color:var(--gold); }
+.carousel-3d { width:270px; height:350px; position:relative; transform-style:preserve-3d; animation:rotateCarousel 20s linear infinite; }
+.carousel-3d:hover { animation-play-state:paused; }
+.carousel-item { position:absolute; inset:0; border-radius:20px; overflow:hidden; border:2px solid rgba(212,175,55,.4); box-shadow:0 20px 40px rgba(0,0,0,.8); backface-visibility:hidden; }
+.carousel-item img { width:100%; height:100%; object-fit:cover; }
+.carousel-item:nth-child(1) { transform:rotateY(0deg) translateZ(220px); }
+.carousel-item:nth-child(2) { transform:rotateY(90deg) translateZ(220px); }
+.carousel-item:nth-child(3) { transform:rotateY(180deg) translateZ(220px); }
+.carousel-item:nth-child(4) { transform:rotateY(270deg) translateZ(220px); }
+@keyframes rotateCarousel { from { transform:rotateY(0deg); } to { transform:rotateY(360deg); } }
+@media(max-width:768px) {
+ .carousel-3d { width:190px; height:260px; }
+ .carousel-item:nth-child(1) { transform:rotateY(0deg) translateZ(155px); }
+ .carousel-item:nth-child(2) { transform:rotateY(90deg) translateZ(155px); }
+ .carousel-item:nth-child(3) { transform:rotateY(180deg) translateZ(155px); }
+ .carousel-item:nth-child(4) { transform:rotateY(270deg) translateZ(155px); }
+}
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+
+/* Smartphone frame used by the Live Demo previews */
+.phone-frame {
+  position: relative;
+  width: min(100%, 292px);
+  aspect-ratio: 9 / 19.2;
+  padding: 9px;
+  border-radius: 43px;
+  background: linear-gradient(145deg, #55565c 0%, #151518 20%, #080809 70%, #77777b 100%);
+  border: 2px solid #77777c;
+  box-shadow: 0 24px 55px rgba(0,0,0,.65), inset 0 0 0 2px #09090b, 0 0 0 1px rgba(212,175,55,.15);
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.phone-screen {
+  position: absolute;
+  inset: 9px;
+  overflow: hidden; /* frame එකෙන්පිටට පනින කොටස් සම්පූර්ණයෙන්ම සඟවයි */
+  border-radius: 34px;
+  background: #050507;
+  isolation: isolate;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.phone-statusbar {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 29px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 23px;
+  color: #171717;
+  background: rgba(255,255,255,.94);
+  font: 600 10px/1 Arial, sans-serif;
+  pointer-events: none;
+}
+
+.phone-status-icons { 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
+  font-size: 8px; 
+}
+
+.phone-battery { 
+  width: 14px; 
+  height: 7px; 
+  border: 1px solid #222; 
+  border-radius: 2px; 
+  padding: 1px; 
+  display: inline-flex; 
+}
+
+.phone-battery i { 
+  display: block; 
+  width: 75%; 
+  background: #222; 
+  border-radius: 1px; 
+}
+
+.phone-dynamic-island {
+  position: absolute;
+  z-index: 11;
+  width: 76px;
+  height: 20px;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 99px;
+  background: #050505;
+  pointer-events: none;
+}
+
+/* Blur සහ Scroll ප්‍රශ්න විසඳූ iframe කොටස */
+.phone-iframe {
+  position: absolute;
+  top: 29px;
+  left: 0;
+  display: block;
+  width: calc(100% + 16px);
+  height: calc(100% - 29px);
+  border: 0;
+  background: #050507;
+  /* Transform එක ඉවත් කර, 100% size දීලා crisp සහ blur නොවී තබා ඇත */
+  transform: none; 
+  
+  /* Scrollbars සම්පූර්ණයෙන්ම Hide කිරීම */
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.phone-iframe::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.phone-side-button {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(90deg,#777,#202024);
+  border-radius: 4px 0 0 4px;
+}
+
+.phone-side-left { 
+  left: -4px; 
+  top: 105px; 
+  height: 52px; 
+}
+
+.phone-side-right { 
+  right: -4px; 
+  top: 130px; 
+  height: 70px; 
+  border-radius: 0 4px 4px 0; 
+}
+
+@media(max-width: 640px) {
+  .phone-frame { 
+    width: min(100%, 270px); 
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
